@@ -17,6 +17,9 @@ class Usuarios(db.Model):
     nombre   = db.Column(db.String(80), unique=True)
     password = db.Column(db.String(40))
     
+    # Con esto se conectan Usuarios y Mensajes para poder ir de uno a otro
+    mensajes = db.relationship("Mensajes", back_populates="autor")
+    
     def __init__(self, nombre, password):
         self.nombre   = nombre
         self.password = password
@@ -36,6 +39,9 @@ class Mensajes(db.Model):
     texto   = db.Column(db.String(200))
     tiempo  = db.Column(db.DateTime)
     idAutor = db.Column(db.Integer, None, db.ForeignKey('usuarios.id'))
+    
+    # La otra parte para conectar con Usuarios
+    autor = db.relationship("Usuarios", back_populates="mensajes")
     
     def __init__(self, texto, idAutor):
         self.texto   = texto

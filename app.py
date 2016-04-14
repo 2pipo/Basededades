@@ -126,8 +126,8 @@ class MensajesAPI(Resource):
     def get(self):
         msjs = Mensajes.query.all()
         
-        # Se podría buscar el nombre de los autores en lugar de su id
-        return [{'texto':m.texto, 'tiempo':str(m.tiempo), 'autor':m.idAutor} for m in msjs]
+        # Mediante m.autor accedemos a la info del autor gracias a la relationship
+        return [{'texto':m.texto, 'tiempo':str(m.tiempo), 'autor':m.autor.nombre} for m in msjs]
     
     # No se pueden modificar los mensajes
     def put(self):
