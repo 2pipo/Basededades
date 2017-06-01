@@ -17,9 +17,6 @@ class Usuarios(db.Model):
     nombre   = db.Column(db.String(80), unique=True)
     password = db.Column(db.String(40))
     
-    # Con esto se conectan Usuarios y Mensajes para poder ir de uno a otro
-    #Telemetria = db.relationship("Mensajes", back_populates="autor")
-    
     def __init__(self, nombre, password):
         self.nombre   = nombre
         self.password = password
